@@ -1,0 +1,25 @@
+img {
+    height: 285px;
+    width: 285px;
+    max-width: 100%;
+    object-fit: cover;
+}
+.row-spacer {
+    padding: 20px 0;
+}
+header {
+   background: burlywood;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.select-wrap {
+    margin-right: 10px;
+}
+.form-control {
+    max-width: 300px;
+}
+input[type="checkbox"] ~ label {
+    font-weight: normal;
+}

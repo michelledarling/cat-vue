@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>All Cats Considered</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <header>
+        <div class="pt-2 pb-2 container">
+            <h1>{{ title }}</h1>
+        </div>
+    </header>
+    <div class="print-stuff">
+
+    </div>
+    <div class="mt-4 container">
+        <div class="filters row-spacer d-flex">
+            <div class="select-wrap">
+                <label for="cat-type">Cat Type</label>
+                <select id="cat-type" class="form-control" @change="changeCatType($event)">
+                    <option value="" selected>Select a Type</option>
+                    <option v-for="catType in catTypes" :value="catType.name" :key="catType.name">{{ catType.name }}</option>
+                </select>
+            </div>
+            <div class="select-wrap">
+                <label for="cat-color">Cat Color</label>
+                <select id="cat-color" class="form-control" @change="changeCatColor($event)">
+                    <option value="" selected>Select a Color</option>
+                    <option v-for="catColor in catColors" :value="catColor.name" :key="catColor.name">{{ catColor.name }}</option>
+                </select>
+            </div>
+            <div class="select-wrap">
+                <label for="cat-name">Cat Name</label>
+                <select id="cat-name" class="form-control" @change="changeCatName($event)">
+                    <option value="" selected>Select a Cat</option>
+                    <option v-for="cat in cats" :value="cat.name" :key="cat.name">{{ cat.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="images row row-spacer">
+            <div v-for="photo in filteredPhotos" class="img-wrap col-3 mb-4">
+                <img v-bind:src="'images/' + photo.file" :alt="photo.cats" />
+            </div>
+        </div>
+        <div class="form-add">
+            <h2>Add more cats!</h2>
+            <div class="form-group">
+                <label for="file">Image Filename</label>
+                <input type="text" id="file" class="form-control" v-model="newPhoto.file" />
+            </div>
+            <div class="form-group">
+                <div class="font-weight-bold">Names of cats in the photo</div>
+                <div v-for="cat in cats">
+                    <input type="checkbox" :id="cat.name | slugify" :value="cat.name" v-model="newPhoto.cats" />
+                    <label :for="cat.name | slugify"> {{ cat.name }}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="font-weight-bold">Names of cats in the photo</div>
+                <div v-for="catColor in catColors">
+                    <input type="checkbox" :id="catColor.name" :value="catColor.name" v-model="newPhoto.color" />
+                    <label :for="catColor.name"> {{ catColor.name }}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="font-weight-bold">Types of cats in the photo</div>
+                <div v-for="catType in catTypes">
+                    <input type="checkbox" :id="catType.name | slugify" :value="catType.name" v-model="newPhoto.type" />
+                    <label :for="catType.name | slugify"> {{ catType.name }}</label>
+                </div>
+            </div>
+            <button @click="addNewPhoto()">Submit Photo</button>
+        </div>
+    </div>
+</div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCUT52z6Hw7raEuSBU2nTt4TWl_LNbEh64",
+        authDomain: "all-cats-considered.firebaseapp.com",
+        projectId: "all-cats-considered",
+        storageBucket: "all-cats-considered.appspot.com",
+        messagingSenderId: "954279217178",
+        appId: "1:954279217178:web:d468ddd21ee8e3d3cee9a3"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //var storage = firebase.storage();
+
+</script>
+<script src="app.js"></script>
+</body>
+</html>
