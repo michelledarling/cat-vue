@@ -1,4 +1,4 @@
-# cat-vue
+# Cat Vue
 This is pretty much a more complicated "Hello World" app to learn vue.
 
 ### Goal
